@@ -738,13 +738,13 @@ hotels &lt;- read_csv(&quot;./data/hotels.csv&quot;)</code></pre>
 <p><strong>Note:</strong> You will need to set <code>eval=TRUE</code> when you have an answer you want to try out.</p>
 <pre class="r"><code>hotels %&gt;%
   filter(
-    country ____ &quot;USA&quot;, 
-    lead_time ____ ____
+    country != &quot;USA&quot;, 
+    lead_time &lt; 1
     )</code></pre>
 </div>
 <div id="exercise-3." class="section level3">
 <h3>Exercise 3.</h3>
-<p>How many bookings involve at least 1 child <strong>or</strong> baby?</p>
+<p>How many bookings involve at least 1 child <strong>or</strong> baby? 9,322.</p>
 <p>In the following chunk, replace</p>
 <ul>
 <li><code>[AT LEAST]</code> with the logical operator for “at least” (in two places)</li>
@@ -753,7 +753,7 @@ hotels &lt;- read_csv(&quot;./data/hotels.csv&quot;)</code></pre>
 <p><strong>Note:</strong> You will need to set <code>eval=TRUE</code> when you have an answer you want to try out.</p>
 <pre class="r"><code>hotels %&gt;%
   filter(
-    children [AT LEAST] 1 [OR] babies [AT LEAST] 1
+    children &gt;= 1 | babies &gt;= 1
     )</code></pre>
 </div>
 <div id="exercise-4." class="section level3">

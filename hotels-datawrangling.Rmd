@@ -49,14 +49,14 @@ try out.
 ```{r travel-whim, eval=FALSE}
 hotels %>%
   filter(
-    country ____ "USA", 
-    lead_time ____ ____
+    country != "USA", 
+    lead_time < 1
     )
 ```
 
 ### Exercise 3.
 
-How many bookings involve at least 1 child **or** baby?
+How many bookings involve at least 1 child **or** baby? 9,322.
 
 In the following chunk, replace 
 
@@ -69,7 +69,7 @@ try out.
 ```{r some-children, eval=FALSE}
 hotels %>%
   filter(
-    children [AT LEAST] 1 [OR] babies [AT LEAST] 1
+    children >= 1 | babies >= 1
     )
 ```
 
