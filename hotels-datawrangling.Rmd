@@ -81,14 +81,23 @@ number of bookings in resort hotels that have more than 1 child **or** baby
 in the room? Then, do the same for city hotels, and compare the numbers of 
 rows in the resulting filtered data frames.
 
+Resort Hotel = 3,919
 ```{r resort-children}
-# add code here
+hotels %>%
+     filter(
+         hotel == "Resort | Hotel", 
+         children >= 1 | babies >= 1
+    )
 # pay attention to correctness and code style
 ```
 
+City Hotel = 5,403
 ```{r city-children}
-# add code here
-# pay attention to correctness and code style
+hotels %>%
+     filter(
+         hotel == "City Hotel", 
+         children >= 1 | babies >= 1
+    )
 ```
 
 ### Exercise 5.
@@ -103,9 +112,12 @@ Your label should be short, informative, and shouldn't include spaces. It also
 shouldn't repeat a previous label, otherwise R Markdown will give you an 
 error about repeated R chunk labels.
 
-```{r label-me-1}
-# add code here
-# pay attention to correctness and code style
+```{r adults-descending}
+hotels %>% 
+  count(adults) %>% 
+  arrange(desc(n))
+
+# surprising that there are 403 children traveling alone
 ```
 
 ### Exercise 6.
@@ -116,8 +128,16 @@ reveal about the surprising results you spotted in the previous exercise?
 
 **Note:** Don't forget to label your R chunk as well (where it says `label-me-2`). 
 
-```{r label-me-2}
-# add code here
+```{r freq_table_cancelled_bookings}
+hotels %>% 
+  filter(is_canceled == 1) %>% 
+  count(adults) %>% 
+  arrange(desc(n)) 
+    
+hotels %>% 
+  filter(is_canceled == 0) %>% 
+  count(adults) %>% 
+  arrange(desc(n))
 # pay attention to correctness and code style
 ```
 
@@ -125,11 +145,18 @@ reveal about the surprising results you spotted in the previous exercise?
 
 Calculate minimum, mean, median, and maximum average daily rate (`adr`) grouped 
 by `hotel` type so that you can get these statistics separately for resort and 
-city hotels. Which type of hotel is higher, on average? 
+city hotels. Which type of hotel is higher, on average? City.
 
 ```{r label-me-3}
-# add code here
-# pay attention to correctness and code style
+hotels %>% 
+  group_by(hotel) %>% 
+  summarize(
+    min_adr = min(adr),
+    max_adr = max(adr),
+    mean_adr = mean(adr),
+    median_adr = median(adr),
+  )
+
 ```
 
 ### Exercise 8.
@@ -144,9 +171,12 @@ preferably you should identify them in a reproducible way with some code.
 **Hint:** For example, you can `filter` for the given `adr` amounts and 
 `select` the relevant columns.
 
-```{r label-me-4}
-# add code here
-# pay attention to correctness and code style
+```{r unusual-obs}
+hotels %>% 
+  mutate(people = adults + children + babies) %>% 
+  filter(adr == 5400 | adr == -6.38) %>% 
+  select(hotel, adr, arrival_date_month, arrival_date_year, people)
+
 ```
 
 
